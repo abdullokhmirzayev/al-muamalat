@@ -1,11 +1,15 @@
+import { cn } from '@/lib/utils'
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono, Inter, Nunito_Sans } from 'next/font/google'
 import './globals.css'
-import { cn } from "@/lib/utils";
+import { Navbar } from '@/components/shared/navbar'
 
-const nunitoSansHeading = Nunito_Sans({subsets:['latin'],variable:'--font-heading'});
+const nunitoSansHeading = Nunito_Sans({
+	subsets: ['latin'],
+	variable: '--font-heading',
+})
 
-const inter = Inter({subsets:['latin'],variable:'--font-sans'});
+const inter = Inter({ subsets: ['latin'], variable: '--font-sans' })
 
 const geistSans = Geist({
 	variable: '--font-geist-sans',
@@ -30,12 +34,23 @@ export default function RootLayout({
 	return (
 		<html
 			lang='en'
-			className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, "font-sans", inter.variable, nunitoSansHeading.variable)}
+			className={cn(
+				'h-full',
+				'antialiased',
+				geistSans.variable,
+				geistMono.variable,
+				'font-sans',
+				inter.variable,
+				nunitoSansHeading.variable,
+			)}
 		>
 			<head>
 				<link rel='icon' href='/favicon.ico' />
 			</head>
-			<body className='min-h-full flex flex-col'>{children}</body>
+			<body className='min-h-full flex flex-col font-sans'>
+				<Navbar />
+				<main className='flex-1'>{children}</main>
+			</body>
 		</html>
 	)
 }
