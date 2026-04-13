@@ -44,7 +44,7 @@ const HomeHero = () => {
 
 	return (
 		<section className='w-full min-h-130 bg-white relative mb-20'>
-			<div className=' overflow-hidden bg-[#009688] h-[90vh]'>
+			<div className='overflow-hidden bg-[#009688] h-[83vh]'>
 				{/* 250k Students Badge */}
 				<div className='absolute right-[30%] top-6 z-20 flex items-center gap-3 rounded-[20px] bg-white/80 px-8 py-5 shadow-xl'>
 					<div className='flex h-9 w-9 items-center justify-center rounded-lg bg-sky-100'>
