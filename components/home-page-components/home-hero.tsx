@@ -72,7 +72,7 @@ const HomeHero = () => {
 				</div>
 
 				{/* Left content */}
-				<div className='relative z-20 flex h-full flex-col justify-center px-10 md:px-16 lg:px-24 max-w-[60%]'>
+				<div className='relative z-20 flex h-full flex-col justify-center px-10 md:px-16 lg:px-32.5 max-w-[60%]'>
 					<Badge
 						variant='outline'
 						className='mb-6 border-white/20 rounded-[10px] bg-white px-6 py-4 text-[17px] font-medium text-slate-700 shadow-sm w-fit'
