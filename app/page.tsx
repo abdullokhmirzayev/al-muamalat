@@ -1,12 +1,9 @@
-import Image from 'next/image'
+import HomeHero from '@/components/home-page-components/home-hero'
 
 export default function Home() {
 	return (
-		<div className='flex flex-col items-center justify-center min-h-screen py-2'>
-		
-			<h1 className='text-6xl font-bold'>
-				Welcome to <span className='text-primary-500'>al-muamalat</span>
-			</h1>
-		</div>
+		<main className='mt-20 flex flex-col items-center justify-center'>
+			<HomeHero />
+		</main>
 	)
 }
