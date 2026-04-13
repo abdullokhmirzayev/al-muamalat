@@ -1,13 +1,8 @@
+import Header from '@/components/shared/header'
 import { cn } from '@/lib/utils'
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono, Inter, Nunito_Sans } from 'next/font/google'
+import { Geist, Geist_Mono, Inter } from 'next/font/google'
 import './globals.css'
-import { Navbar } from '@/components/shared/navbar'
-
-const nunitoSansHeading = Nunito_Sans({
-	subsets: ['latin'],
-	variable: '--font-heading',
-})
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' })
 
@@ -41,15 +36,11 @@ export default function RootLayout({
 				geistMono.variable,
 				'font-sans',
 				inter.variable,
-				nunitoSansHeading.variable,
 			)}
 		>
-			<head>
-				<link rel='icon' href='/favicon.ico' />
-			</head>
-			<body className='min-h-full flex flex-col font-sans'>
-				<Navbar />
-				<main className='flex-1'>{children}</main>
+			<body className='min-h-full flex flex-col'>
+				<Header />
+				{children}
 			</body>
 		</html>
 	)
