@@ -179,9 +179,11 @@ const Header = () => {
 
 					<div className='h-8 w-[1.5px] bg-gray-200 mx-3' />
 
-					<Button className='bg-[#00897B] hover:bg-[#00796B] text-white px-7 py-5 rounded-[10px] text-[15px] font-medium transition-all shadow-sm active:scale-95 curpo'>
-						Sign in
-					</Button>
+					<Link href='/sign-in'>
+						<Button className='bg-[#00897B] hover:bg-[#00796B] text-white px-7 py-5 rounded-[10px] text-[15px] font-medium transition-all shadow-sm active:scale-95 curpo'>
+							Sign in
+						</Button>
+					</Link>
 				</div>
 			</div>
 		</header>

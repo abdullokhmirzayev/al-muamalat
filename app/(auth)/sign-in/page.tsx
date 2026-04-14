@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Mail } from 'lucide-react'
+import { KeyRound, Mail } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -26,7 +26,7 @@ const SignInPage = () => {
 					</Link>
 
 					{/* Ask Diyor */}
-					<div className='flex items-center gap-3 relative left-[17%] z-10'>
+					<div className='flex items-center gap-10 relative left-[17%] z-10'>
 						<div className='text-right'>
 							<p className='text-xl text-slate-400'>Questions?</p>
 							<p className='text-3xl font-semibold text-[#009688]'>Ask Diyor</p>
@@ -54,20 +54,23 @@ const SignInPage = () => {
 							<Input
 								type='email'
 								placeholder='Enter your email'
-								className='pr-10 h-12 rounded-xl border-slate-200 bg-white text-sm placeholder:text-slate-400 focus-visible:ring-teal-500'
+								className='pr-10 h-14 rounded-[10px] border-slate-200 bg-white text-sm placeholder:text-slate-400 focus-visible:ring-[#009688] placeholder:text-xl'
 							/>
-							<Mail className='absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 pointer-events-none' />
+							<Mail className='absolute right-3 top-1/2 -translate-y-1/2 h-6 w-6 text-slate-400 pointer-events-none' />
 						</div>
 
 						{/* Password */}
-						<Input
-							type='password'
-							placeholder='Password'
-							className='h-12 rounded-xl border-slate-200 bg-white text-sm placeholder:text-slate-400 focus-visible:ring-teal-500'
-						/>
+						<div className='relative'>
+							<Input
+								type='password'
+								placeholder='Password'
+								className='pr-10 h-14 rounded-[10px] border-slate-200 bg-white text-sm placeholder:text-slate-400 focus-visible:ring-[#009688] placeholder:text-xl'
+							/>
+							<KeyRound className='absolute right-3 top-1/2 -translate-y-1/2 h-6 w-6 text-slate-400 pointer-events-none' />
+						</div>
 
 						{/* Sign in button */}
-						<Button className='h-12 rounded-xl bg-[#009688] hover:bg-teal-700 text-white font-semibold text-sm mt-1'>
+						<Button className='cursor-pointer h-14 rounded-[10px] bg-[#009688] hover:bg-teal-700 text-white font-semibold text-base mt-1'>
 							Sign in
 						</Button>
 					</div>
