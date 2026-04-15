@@ -23,7 +23,7 @@ import Link from 'next/link'
 
 const Header = () => {
 	return (
-		<header className='fixed top-0 w-full border-b bg-white z-50'>
+		<header className='fixed top-0 w-full border-b bg-white z-50 shadow-[0px_6px_12px_0px_#0000001A]'>
 			<div className='container mx-auto flex h-20 items-center justify-between px-4'>
 				{/* Logo Qismi */}
 				<Link
