@@ -9,7 +9,7 @@ export default function MainLayout({
 	return (
 		<>
 			<Header />
-			<div className='mb-20'>{children}</div>
+			<div className='mb-20 flex-1'>{children}</div>
 			<Footer />
 		</>
 	)

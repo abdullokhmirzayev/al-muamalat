@@ -21,7 +21,7 @@ const socials = [
 
 export function Footer() {
 	return (
-		<footer className='w-full bg-[#009688] mt-auto'>
+		<footer className='w-full bg-[#009688]'>
 			<div className='container mx-auto px-6 py-10 flex flex-col items-center gap-6'>
 				{/* Logo */}
 				<Link href='/' className='relative w-36 h-20'>
