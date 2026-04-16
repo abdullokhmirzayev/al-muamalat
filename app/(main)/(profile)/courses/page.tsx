@@ -1,4 +1,4 @@
-import Courses from '@/components/courses-page.components/courses'
+import Courses from '@/components/courses-page-components/courses'
 
 const Page = () => {
 	return (

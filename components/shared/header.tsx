@@ -67,7 +67,7 @@ const Header = () => {
 										{[
 											{
 												title: 'International educational programs',
-												href: '/p1',
+												href: '/international-educational-programs',
 												active: false,
 											},
 											{ title: 'Specialized courses', href: '/p2' },

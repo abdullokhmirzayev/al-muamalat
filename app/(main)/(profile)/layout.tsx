@@ -11,7 +11,7 @@ const ProfileLayout = ({ children }: { children: React.ReactNode }) => {
 	const inActiveStyle =
 		'px-8 h-10 rounded-md text-gray-500 font-medium border-gray-200'
 	return (
-		<div className=' bg-gray-50/30 pt-56 pb-36 sm:px-6 lg:px-8'>
+		<div className=' bg-gray-50/30 py-36 sm:px-6 lg:px-8'>
 			<div className='container max-w-6xl mx-auto space-y-6'>
 				<div className='flex gap-4'>
 					<Link href={'/profile'}>
