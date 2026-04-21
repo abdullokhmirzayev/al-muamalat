@@ -1,4 +1,5 @@
-import Image from 'next/image'
+// images
+import SignImg from '@/assets/sign-img.png'
 
 const SingPageRight = () => {
 	return (
@@ -9,8 +10,8 @@ const SingPageRight = () => {
 
 			{/* Illustration */}
 			<div className='relative w-full flex-1 flex items-center justify-center'>
-				<Image
-					src='/images/sign-img.png'
+				<img
+					src={SignImg}
 					alt='Sign up illustration'
 					width={380}
 					height={380}
