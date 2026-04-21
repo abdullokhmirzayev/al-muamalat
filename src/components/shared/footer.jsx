@@ -3,6 +3,9 @@ import { InstagramIcon } from './icons/instagram-icon'
 import { TwitterXIcon } from './icons/twitterx-icon'
 import { YoutubeIcon } from './icons/youtube-icon'
 
+// images
+import FooterLogo from '@/assets/footer-logo.png'
+
 const navLinks = [
 	{ label: 'Home', href: '/' },
 	{ label: 'About', href: '/about' },
@@ -23,10 +26,10 @@ export function Footer() {
 			<div className='container mx-auto px-6 py-10 flex flex-col items-center gap-6'>
 				{/* Logo */}
 				<a href='/' className='relative w-36 h-20'>
-					<image
-						src='/images/footer-logo.png'
+					<img
+						src={FooterLogo}
 						alt='Footer Logo'
-						fill
+						
 						className='object-contain'
 					/>
 				</a>

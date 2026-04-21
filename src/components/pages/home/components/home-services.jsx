@@ -69,7 +69,7 @@ const HomeServices = () => {
 	return (
 		<section className='w-full px-6 py-16 md:px-16 lg:px-32.5 bg-white'>
 			{/* Header */}
-			<div className='text-center mb-12'>
+			<div className='text-center mb-12 flex flex-col items-center justify-center'>
 				<h2 className='text-4xl font-bold text-slate-900 mb-4'>Our services</h2>
 				<p className='text-slate-500 text-xl max-w-xl mx-auto leading-relaxed'>
 					Expert guidance for managing funds in alignment with Islamic

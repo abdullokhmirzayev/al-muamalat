@@ -63,14 +63,12 @@ const HomeOurTeam = () => {
 	const next = team[(current + 1) % team.length]
 
 	return (
-		// ✅ container yo'q — to'liq kenglik, carousel chetlarga chiqishi uchun
 		<section className='w-full bg-white py-16 overflow-hidden'>
-			{/* Header — container ichida */}
-			<div className='container mx-auto px-6 text-center mb-12'>
+			<div className='container mx-auto mb-12 text-center flex flex-col items-center justify-center'>
 				<h2 className='text-4xl font-bold text-slate-900 mb-4'>
-					Our Expert Team
+					Our Expert Team{' '}
 				</h2>
-				<p className='text-slate-500 text-sm max-w-md mx-auto leading-relaxed'>
+				<p className='text-slate-500 text-xl max-w-xl mx-auto mt-5 leading-relaxed'>
 					Our team consists of seasoned professionals with extensive experience
 					in Islamic finance and management. Each member brings a unique set of
 					skills and expertise.

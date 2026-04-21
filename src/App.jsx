@@ -1,11 +1,10 @@
-import Header from './components/shared/header'
+import { RouterProvider } from 'react-router-dom'
+import { router } from './routes'
 
 export default function App() {
-	console.log()
-
 	return (
 		<div className=''>
-			<Header />
+			<RouterProvider router={router} />
 		</div>
 	)
 }

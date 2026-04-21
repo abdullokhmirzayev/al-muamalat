@@ -7,6 +7,9 @@ import { CalendarDays, Star } from 'lucide-react'
 import { useState } from 'react'
 
 // images
+import AvatarImg1 from '@/assets/avatar1.png'
+import AvatarImg2 from '@/assets/avatar2.png'
+import AvatarImg3 from '@/assets/avatar3.png'
 import heroImage from '@/assets/hero-student.png'
 
 const slides = [
@@ -48,7 +51,7 @@ const HomeHero = () => {
 		<section className='w-full min-h-130 bg-white relative mb-20'>
 			<div className='overflow-hidden bg-[#009688] h-[83vh]'>
 				{/* 250k Students Badge */}
-				<div className='absolute right-[30%] top-6 z-20 flex items-center gap-3 rounded-[20px] bg-white/80 px-8 py-5 shadow-xl'>
+				<div className='absolute right-[35%] top-16 z-20 flex items-center gap-3 rounded-[20px] bg-white/80 px-8 py-5 shadow-xl'>
 					<div className='flex h-9 w-9 items-center justify-center rounded-lg bg-sky-100'>
 						<CalendarDays className='h-5 w-5 text-sky-500' />
 					</div>
@@ -61,12 +64,11 @@ const HomeHero = () => {
 				</div>
 
 				{/* Hero image */}
-				<div className='absolute inset-y-0 right-0 h-full w-[45%] hidden md:flex md:items-end z-10'>
+				<div className='absolute inset-y-24 right-0 h-full w-[45%] hidden md:flex md:items-end z-10'>
 					<div className='relative w-full h-[95%]'>
 						<img
 							src={slides[current].image}
 							alt='Student holding books'
-							fill
 							className='object-contain object-bottom'
 							priority
 						/>
@@ -92,11 +94,7 @@ const HomeHero = () => {
 								Students&apos; Opinion
 							</Button>
 							<div className='mr-3 flex -space-x-2 absolute top-[6%] right-[-60%]'>
-								{[
-									'/images/avatar1.png',
-									'/images/avatar2.png',
-									'/images/avatar3.png',
-								].map((src, i) => (
+								{[AvatarImg1, AvatarImg2, AvatarImg3].map((src, i) => (
 									<Avatar key={i} className='h-13 w-13'>
 										<AvatarImage src={src} alt={`Student ${i + 1}`} />
 										<AvatarFallback className='bg-slate-400 text-[10px] text-white'>
