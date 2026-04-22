@@ -37,7 +37,7 @@ const Header = () => {
 				</a>
 
 				{/* Markaziy Menyu */}
-				<NavigationMenu className='hidden lg:flex'>
+				<NavigationMenu className='hidden lg:flex cursor-pointer'>
 					<NavigationMenuList className='gap-1'>
 						<NavigationMenuItem>
 							<NavigationMenuLink asChild>
@@ -54,7 +54,7 @@ const Header = () => {
 						</NavigationMenuItem>
 
 						<NavigationMenuItem>
-							<NavigationMenuTrigger className='text-gray-600 font-medium hover:text-[#00897B] transition-colors'>
+							<NavigationMenuTrigger className='text-gray-600 font-medium cursor-pointer hover:text-[#00897B] transition-colors'>
 								Programs
 							</NavigationMenuTrigger>
 							<NavigationMenuContent>
@@ -135,7 +135,7 @@ const Header = () => {
 						<DropdownMenuTrigger asChild>
 							<Button
 								variant='ghost'
-								className='flex items-center gap-2 px-2 focus-visible:ring-0 focus-visible:ring-offset-0 hover:bg-transparent group'
+								className=' cursor-pointer flex items-center gap-2 px-2 focus-visible:ring-0 focus-visible:ring-offset-0 hover:bg-transparent group'
 							>
 								<div className='relative w-6 h-4 overflow-hidden rounded-xs border border-gray-100'>
 									<img src={useFlag} alt='English' className='object-cover' />
@@ -173,7 +173,7 @@ const Header = () => {
 					<div className='h-8 w-[1.5px] bg-gray-200 mx-3' />
 
 					<a href='/sign-in'>
-						<Button className='bg-[#00897B] hover:bg-[#00796B] text-white px-7 py-5 rounded-[10px] text-[15px] font-medium transition-all shadow-sm active:scale-95 curpo'>
+						<Button className='bg-[#00897B] cursor-pointer hover:bg-[#00796B] text-white px-7 py-5 rounded-[10px] text-[15px] font-medium transition-all shadow-sm active:scale-95 curpo'>
 							Sign in
 						</Button>
 					</a>

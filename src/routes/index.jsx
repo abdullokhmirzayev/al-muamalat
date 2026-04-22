@@ -1,12 +1,12 @@
 import AuthLayout from '@/components/layouts/auth-layout'
 import RootLayout from '@/components/layouts/root-layout'
-import SignInPage from '@/components/pages/auth/sign-in'
-import SignUpPage from '@/components/pages/auth/sign-up'
 import { lazy } from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 
 // import layzy pages
 const Home = lazy(() => import('@/components/pages/home/home'))
+const SignIn = lazy(() => import('@/components/pages/auth/sign-in'))
+const SignUp = lazy(() => import('@/components/pages/auth/sign-up'))
 
 export const router = createBrowserRouter([
 	{
@@ -17,8 +17,8 @@ export const router = createBrowserRouter([
 	{
 		element: <AuthLayout />,
 		children: [
-			{ path: 'sign-in', element: <SignInPage /> },
-			{ path: 'sign-up', element: <SignUpPage /> },
+			{ path: 'sign-in', element: <SignIn /> },
+			{ path: 'sign-up', element: <SignUp /> },
 		],
 	},
 ])
