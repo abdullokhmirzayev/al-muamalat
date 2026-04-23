@@ -70,7 +70,7 @@ const HomeHero = () => {
 							src={slides[current].image}
 							alt='Student holding books'
 							className='object-contain object-bottom'
-							priority
+							
 						/>
 					</div>
 				</div>
