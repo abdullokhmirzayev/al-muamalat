@@ -71,12 +71,23 @@ const Verify = () => {
 	const verifySubmit = () => {
 		if (otpValue.length !== 6) return
 
+		const email = auth?.user?.email || localStorage.getItem('tempEmail')
+
+		if (!email) {
+			toast.error('Email address not found')
+			navigate('/sign-in')
+			return
+		}
+
 		const payload = {
-			email: auth.user.email,
+			email,
 			otp: otpValue,
 		}
 
-		auth.handleVerifyOtp(payload, () => navigate('/profile'))
+		auth.handleVerifyOtp(payload, () => {
+			localStorage.removeItem('tempEmail')
+			navigate('/profile')
+		})
 	}
 
 	const handleResend = () => {
@@ -84,6 +95,13 @@ const Verify = () => {
 		setResendTimer(60)
 		inputRefs.current[0]?.focus()
 	}
+
+	useEffect(() => {
+		const savedEmail = localStorage.getItem('tempEmail')
+		if (!auth?.user?.email && !savedEmail) {
+			navigate('/sign-in')
+		}
+	}, [])
 
 	return (
 		<div className='w-full max-w-md mx-auto'>

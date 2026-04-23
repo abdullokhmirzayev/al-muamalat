@@ -26,6 +26,7 @@ const AuthProvider = ({ children }) => {
 		request
 			.post('/v2/auth/signin/init', params)
 			.then(response => {
+				localStorage.setItem('tempEmail', params.email)
 				setUser({ email: params.email })
 				if (callback) callback()
 			})
