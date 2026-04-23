@@ -19,36 +19,45 @@ const AuthProvider = ({ children }) => {
 	const [user, setUser] = useState(defaultProvider.user)
 	const [loading, setLoading] = useState(defaultProvider.loading)
 
+	console.log(user)
+
 	const handleLogin = (params, callback) => {
 		setLoading(true)
 		request
 			.post('/v2/auth/signin/init', params)
 			.then(response => {
-				console.log(response.data)
-				localStorage.setItem('userToken', response.data.accessToken)
-				localStorage.setItem('refreshToken', response.data.refreshToken)
-				setUser({ ...response.data.user, email: params.email })
+				setUser({ email: params.email })
 				if (callback) callback()
 			})
 			.catch(error => {
-				console.log(error)
+				toast.error(error.response?.data?.message || 'Login failed')
 			})
-			.finally(() => {
-				setLoading(false)
-			})
+			.finally(() => setLoading(false))
 	}
 
-	const handleVerifyOtp = params => {
+	const handleVerifyOtp = (params, callback) => {
+		setLoading(true)
 		request
 			.post('/v2/auth/signin/verify', params)
 			.then(response => {
-				console.log(response.data)
+				const payload = response.data.data
+
+				if (payload && payload.tokens) {
+					const { accessToken, refreshToken } = payload.tokens
+					const userData = payload.user
+					localStorage.setItem('userToken', accessToken)
+					localStorage.setItem('refreshToken', refreshToken)
+					setUser(userData)
+					toast.success('Muvaffaqiyatli kirildi!')
+					if (callback) callback()
+				}
 			})
 			.catch(error => {
-				console.log(error)
+				console.error('Verify Error:', error)
+				toast.error(error.response?.data?.message || 'Kod xato kiritildi')
 			})
 			.finally(() => {
-				toast.success('OTP is valid')
+				setLoading(false)
 			})
 	}
 
