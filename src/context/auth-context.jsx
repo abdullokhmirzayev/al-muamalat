@@ -55,14 +55,14 @@ const AuthProvider = ({ children }) => {
 			})
 			.catch(error => {
 				console.error('Verify Error:', error)
-				toast.error(error.response?.data?.message || 'Kod xato kiritildi')
+				toast.error(error.response?.data?.message || 'Login failed')
 			})
 			.finally(() => {
 				setLoading(false)
 			})
 	}
 
-	const handleRegister = params => {
+	const handleRegister = (params, callback) => {
 		setLoading(true)
 		request
 			.post('/v2/auth/signup/init', params)
@@ -71,9 +71,37 @@ const AuthProvider = ({ children }) => {
 				localStorage.setItem('userToken', response.data.accessToken)
 				localStorage.setItem('refreshToken', response.data.refreshToken)
 				setUser(response.data.user)
+				toast.success('Sign up successful!')
+				if (callback) callback()
 			})
 			.catch(error => {
 				console.log(error)
+			})
+			.finally(() => {
+				setLoading(false)
+			})
+	}
+
+	const handleRegisterVerifyOtp = (params, callback) => {
+		setLoading(true)
+		request
+			.post('/v2/auth/signup/verify', params)
+			.then(response => {
+				const payload = response.data.data
+
+				if (payload && payload.tokens) {
+					const { accessToken, refreshToken } = payload.tokens
+					const userData = payload.user
+					localStorage.setItem('userToken', accessToken)
+					localStorage.setItem('refreshToken', refreshToken)
+					setUser(userData)
+					toast.success('Muvaffaqiyatli kirildi!')
+					if (callback) callback()
+				}
+			})
+			.catch(error => {
+				console.error('Verify Error:', error)
+				toast.error(error.response?.data?.message || 'Login failed')
 			})
 			.finally(() => {
 				setLoading(false)
@@ -86,6 +114,7 @@ const AuthProvider = ({ children }) => {
 		login: handleLogin,
 		register: handleRegister,
 		handleVerifyOtp,
+		handleRegisterVerifyOtp,
 	}
 
 	return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>

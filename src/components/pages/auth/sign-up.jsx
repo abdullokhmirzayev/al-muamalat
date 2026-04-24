@@ -1,12 +1,35 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { useAuth } from '@/hooks/use-auth'
 import { Eye, EyeOff, Mail, Phone, User } from 'lucide-react'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
+import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 const SignUpPage = () => {
 	const [showPassword, setShowPassword] = useState(false)
 
+	const auth = useAuth()
+	const navigate = useNavigate()
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm()
+
+	const onSubmit = values => {
+		localStorage.setItem('tempEmail', values.email)
+
+		auth.register(values, error => {
+			if (!error) {
+				toast.success('Sign up successful!')
+				navigate('/verify-sign-up')
+			} else {
+				toast.error(error.response?.data?.message || 'Sign up failed')
+			}
+		})
+	}
 	return (
 		<>
 			<h1 className='text-[86px] font-black text-slate-900 leading-tight'>
@@ -22,17 +45,28 @@ const SignUpPage = () => {
 				</Link>
 			</p>
 
-			<form className='flex flex-col gap-4 mt-3'>
+			<form
+				className='flex flex-col gap-4 mt-3'
+				onSubmit={handleSubmit(onSubmit)}
+			>
 				<div className='grid grid-cols-2 gap-3'>
-					<AuthInput name='firstName' placeholder='First name' Icon={User} />
-					<AuthInput name='lastName' placeholder='Last name' Icon={User} />
+					<AuthInput
+						placeholder='First name'
+						Icon={User}
+						{...register('first_name')}
+					/>
+					<AuthInput
+						placeholder='Last name'
+						Icon={User}
+						{...register('last_name')}
+					/>
 				</div>
 
 				<AuthInput
-					name='email'
 					type='email'
 					placeholder='Enter your email'
 					Icon={Mail}
+					{...register('email')}
 				/>
 
 				<div className='relative'>
@@ -40,6 +74,7 @@ const SignUpPage = () => {
 						type={showPassword ? 'text' : 'password'}
 						placeholder='Enter password'
 						className='pr-10 h-14 rounded-[10px] focus-visible:ring-[#009688]'
+						{...register('password')}
 					/>
 					<button
 						type='button'
@@ -53,8 +88,9 @@ const SignUpPage = () => {
 				<AuthInput
 					name='phoneNumber'
 					type='tel'
-					placeholder='Enter phone number'
+					placeholder='+998901234567'
 					Icon={Phone}
+					{...register('phone_number')}
 				/>
 
 				<Button

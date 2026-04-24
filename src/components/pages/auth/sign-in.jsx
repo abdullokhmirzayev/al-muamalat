@@ -28,7 +28,7 @@ const SignInPage = () => {
 
 		auth.login({ email, password }, error => {
 			if (!error) {
-				navigate('/verify')
+				navigate('/verify-sign-in')
 			} else {
 				toast.error('Invalid email or password')
 			}
@@ -40,6 +40,15 @@ const SignInPage = () => {
 			<h1 className='text-[86px] font-black text-slate-900 mb-10 leading-tight'>
 				Get started
 			</h1>
+			<p className='text-xl text-slate-500 my-3'>
+				Create a new account!{' '}
+				<Link
+					to='/sign-up'
+					className='text-[#009688] font-medium hover:underline cursor-pointer'
+				>
+					Sign up
+				</Link>
+			</p>
 
 			<form className='flex flex-col gap-4' onSubmit={handleSubmit(onSubmit)}>
 				<div className='relative'>
@@ -68,6 +77,16 @@ const SignInPage = () => {
 					</button>
 				</div>
 
+				{/* <p className='text-xl text-slate-500 my-3'>
+					Forgot your password?{' '}
+					<Link
+						to='/sign-up'
+						className='text-[#009688] font-medium hover:underline cursor-pointer'
+					>
+						Reset password
+					</Link>
+				</p> */}
+
 				<Button
 					type='submit'
 					className='h-14 rounded-[10px] cursor-pointer bg-[#009688] hover:bg-teal-700 text-white font-semibold'
@@ -75,16 +94,6 @@ const SignInPage = () => {
 					Sign in
 				</Button>
 			</form>
-
-			<p className='text-center text-xl text-slate-500 mt-5'>
-				Create a new account!{' '}
-				<Link
-					to='/sign-up'
-					className='text-[#009688] font-medium hover:underline cursor-pointer'
-				>
-					Sign up
-				</Link>
-			</p>
 		</>
 	)
 }

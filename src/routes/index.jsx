@@ -1,5 +1,7 @@
 import AuthLayout from '@/components/layouts/auth-layout'
 import RootLayout from '@/components/layouts/root-layout'
+import { VerifySignInPage } from '@/components/pages/auth/verify-sign-in'
+import { VerifySignUpPage } from '@/components/pages/auth/verify-sign-up'
 import { lazy } from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 
@@ -7,7 +9,7 @@ import { createBrowserRouter } from 'react-router-dom'
 const Home = lazy(() => import('@/components/pages/home/home'))
 const SignIn = lazy(() => import('@/components/pages/auth/sign-in'))
 const SignUp = lazy(() => import('@/components/pages/auth/sign-up'))
-const Verify = lazy(() => import('@/components/pages/auth/verify'))
+const Verify = lazy(() => import('@/components/pages/auth/components/verify'))
 
 export const router = createBrowserRouter([
 	{
@@ -20,7 +22,8 @@ export const router = createBrowserRouter([
 		children: [
 			{ path: 'sign-in', element: <SignIn /> },
 			{ path: 'sign-up', element: <SignUp /> },
-			{ path: 'verify', element: <Verify /> },
+			{ path: '/verify-sign-in', element: <VerifySignInPage /> },
+			{ path: '/verify-sign-up', element: <VerifySignUpPage /> },
 		],
 	},
 ])

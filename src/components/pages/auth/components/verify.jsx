@@ -2,11 +2,13 @@
 
 import { Button } from '@/components/ui/button'
 import { useAuth } from '@/hooks/use-auth'
+import { request } from '@/services/request'
 import { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
-const Verify = () => {
+const Verify = ({ onSuccess, type = 'sign-in', action }) => {
 	const auth = useAuth()
 	const {
 		handleSubmit,
@@ -75,7 +77,7 @@ const Verify = () => {
 
 		if (!email) {
 			toast.error('Email address not found')
-			navigate('/sign-in')
+			navigate(type === 'sign-up' ? '/sign-up' : '/sign-in')
 			return
 		}
 
@@ -84,22 +86,27 @@ const Verify = () => {
 			otp: otpValue,
 		}
 
-		auth.handleVerifyOtp(payload, () => {
+		action(payload, () => {
 			localStorage.removeItem('tempEmail')
-			navigate('/profile')
+			if (onSuccess) onSuccess()
 		})
 	}
 
 	const handleResend = () => {
 		setValue('otp', '')
-		setResendTimer(60)
-		inputRefs.current[0]?.focus()
+
+		const email = auth?.user?.email || localStorage.getItem('tempEmail')
+
+		request.post(`/v2/auth/${type === 'sign-up' ? '/sign-up' : '/sign-in'}/resend`, { email }).then(() => {
+			setResendTimer(300)
+			toast.success('Code sent successfully!')
+		})
 	}
 
 	useEffect(() => {
 		const savedEmail = localStorage.getItem('tempEmail')
 		if (!auth?.user?.email && !savedEmail) {
-			navigate('/sign-in')
+			navigate(type === 'sign-up' ? '/sign-up' : '/sign-in')
 		}
 	}, [])
 
@@ -107,7 +114,7 @@ const Verify = () => {
 		<div className='w-full max-w-md mx-auto'>
 			<div className='mb-10'>
 				<h2 className='text-4xl font-bold text-slate-900 mb-4'>
-					Verify your email
+					{type === 'sign-up' ? 'Confirm Registration' : 'Verify Login'}
 				</h2>
 				<p className='text-slate-500 text-lg'>
 					We&apos;ve sent a 6-digit code to your email. Please enter it below.
@@ -169,8 +176,8 @@ const Verify = () => {
 				<button
 					onClick={handleResend}
 					disabled={resendTimer > 0}
-					className={`text-[#009688] font-medium transition-all cursor-pointer
-						${resendTimer > 0 ? 'opacity-50 cursor-not-allowed' : 'hover:underline'}
+					className={`text-[#009688] font-medium transition-all 
+						${resendTimer > 0 ? 'opacity-50 cursor-not-allowed' : 'hover:underline cursor-pointer'}
 					`}
 				>
 					{resendTimer > 0 ? `Resend in ${resendTimer}s` : 'Resend Code'}

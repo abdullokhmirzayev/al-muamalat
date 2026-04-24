@@ -37,7 +37,7 @@ request.interceptors.response.use(
 				localStorage.setItem('userToken', accessToken)
 				return axios(error.config)
 			} catch (refreshError) {
-				window.location.href = '/login'
+				window.location.href = '/sign-in'
 			}
 		}
 		return Promise.reject(error)
