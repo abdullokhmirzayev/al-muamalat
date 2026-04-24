@@ -1,6 +1,6 @@
 import { useAuth } from '@/hooks/use-auth'
 import { useNavigate } from 'react-router-dom'
-import Verify from './components/Verify'
+import Verify from './components/verify'
 
 export const VerifySignUpPage = () => {
 	const navigate = useNavigate()
