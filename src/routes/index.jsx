@@ -1,5 +1,7 @@
 import AuthLayout from '@/components/layouts/auth-layout'
 import RootLayout from '@/components/layouts/root-layout'
+import { ConfirmPasswordForm } from '@/components/pages/auth/components/confirm-password'
+import { ForgotPassword } from '@/components/pages/auth/forgot-password'
 import { VerifySignInPage } from '@/components/pages/auth/verify-sign-in'
 import { VerifySignUpPage } from '@/components/pages/auth/verify-sign-up'
 import { lazy } from 'react'
@@ -23,6 +25,8 @@ export const router = createBrowserRouter([
 			{ path: 'sign-up', element: <SignUp /> },
 			{ path: '/verify-sign-in', element: <VerifySignInPage /> },
 			{ path: '/verify-sign-up', element: <VerifySignUpPage /> },
+			{ path: '/forgot-password', element: <ForgotPassword /> },
+			{ path: '/forgot-password-confirm', element: <ConfirmPasswordForm /> },
 		],
 	},
 ])

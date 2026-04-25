@@ -3,7 +3,7 @@ import SignImg from '@/assets/sign-img.png'
 
 const SingPageRight = () => {
 	return (
-		<div className='hidden md:flex w-[48%] bg-[#009688] rounded-[2.5rem] flex-col items-center justify-between py-12 px-10 relative overflow-hidden m-5'>
+		<section className='hidden md:flex w-[48%] bg-[#009688] rounded-[2.5rem] flex-col items-center justify-between py-12 px-10 relative overflow-hidden m-5'>
 			{/* Decorative blobs */}
 			<div className='absolute -top-15 -right-15 w-52 h-52 rounded-full bg-teal-500/40' />
 			<div className='absolute -bottom-10 -left-10 w-40 h-40 rounded-full bg-teal-700/40' />
@@ -25,7 +25,7 @@ const SingPageRight = () => {
 					Welcome to Al Muamalat – Empowering Your Journey in Islamic Finance
 				</h2>
 			</div>
-		</div>
+		</section>
 	)
 }
 

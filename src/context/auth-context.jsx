@@ -108,6 +108,40 @@ const AuthProvider = ({ children }) => {
 			})
 	}
 
+	const handleForgotPassword = (params, callback) => {
+		setLoading(true)
+		request
+			.post('/v2/auth/password/forgot/init', params)
+			.then(response => {
+				localStorage.setItem('tempEmail', params.email)
+				setUser({ email: params.email })
+				if (callback) callback()
+			})
+			.catch(error => {
+				toast.error(error.response?.data?.message || 'Forgot password failed')
+			})
+			.finally(() => {
+				setLoading(false)
+			})
+	}
+
+	const handleForgotConfirm = (params, callback) => {
+		setLoading(true)
+		request
+			.post('/v2/auth/password/forgot/confirm', params)
+			.then(response => {
+				toast.success('Parol yangilandi!')
+				if (callback) callback()
+			})
+			.catch(error => {
+				toast.error(error.response?.data?.message || 'Forgot password failed')
+				
+			})
+			.finally(() => {
+				setLoading(false)
+			})
+	}
+
 	const values = {
 		user,
 		loading,
@@ -115,6 +149,8 @@ const AuthProvider = ({ children }) => {
 		register: handleRegister,
 		handleVerifyOtp,
 		handleRegisterVerifyOtp,
+		handleForgotPassword,
+		handleForgotConfirm,
 	}
 
 	return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>

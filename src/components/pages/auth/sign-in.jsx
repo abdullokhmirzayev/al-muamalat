@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 import { useAuth } from '@/hooks/use-auth'
 import { Eye, EyeOff, Mail } from 'lucide-react'
 import { useState } from 'react'
@@ -52,6 +53,9 @@ const SignInPage = () => {
 
 			<form className='flex flex-col gap-4' onSubmit={handleSubmit(onSubmit)}>
 				<div className='relative'>
+					<Label htmlFor='email' className='py-1'>
+						Email
+					</Label>
 					<Input
 						type='email'
 						placeholder='Enter your email'
@@ -62,6 +66,17 @@ const SignInPage = () => {
 				</div>
 
 				<div className='relative'>
+					<div className='flex justify-between'>
+						<Label htmlFor='password' className='py-1'>
+							Password
+						</Label>
+						<Link
+							to={'/forgot-password'}
+							className='cursor-pointer hover:underline text-blue-300'
+						>
+							Forgot password?
+						</Link>
+					</div>
 					<Input
 						type={showPassword ? 'text' : 'password'}
 						placeholder='Enter password'
@@ -76,17 +91,6 @@ const SignInPage = () => {
 						{showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
 					</button>
 				</div>
-
-				{/* <p className='text-xl text-slate-500 my-3'>
-					Forgot your password?{' '}
-					<Link
-						to='/sign-up'
-						className='text-[#009688] font-medium hover:underline cursor-pointer'
-					>
-						Reset password
-					</Link>
-				</p> */}
-
 				<Button
 					type='submit'
 					className='h-14 rounded-[10px] cursor-pointer bg-[#009688] hover:bg-teal-700 text-white font-semibold'

@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
-const Verify = ({ onSuccess, type = 'sign-in', action }) => {
+const Verify = ({ onSuccess, type = 'signin', action }) => {
 	const auth = useAuth()
 	const {
 		handleSubmit,
@@ -77,7 +77,7 @@ const Verify = ({ onSuccess, type = 'sign-in', action }) => {
 
 		if (!email) {
 			toast.error('Email address not found')
-			navigate(type === 'sign-up' ? '/sign-up' : '/sign-in')
+			navigate(type === 'signup' ? '/sign-up' : '/sign-in')
 			return
 		}
 
@@ -97,16 +97,23 @@ const Verify = ({ onSuccess, type = 'sign-in', action }) => {
 
 		const email = auth?.user?.email || localStorage.getItem('tempEmail')
 
-		request.post(`/v2/auth/${type === 'sign-up' ? '/sign-up' : '/sign-in'}/resend`, { email }).then(() => {
-			setResendTimer(300)
-			toast.success('Code sent successfully!')
-		})
+		request
+			.post(`/v2/auth/${type === 'signup' ? 'signup' : 'signin'}/resend`, {
+				email,
+			})
+			.then(() => {
+				setResendTimer(300)
+				toast.success('Code sent successfully!')
+			})
+			.catch(error => {
+				toast.error(error.response?.data?.message || 'Resend failed')
+			})
 	}
 
 	useEffect(() => {
 		const savedEmail = localStorage.getItem('tempEmail')
 		if (!auth?.user?.email && !savedEmail) {
-			navigate(type === 'sign-up' ? '/sign-up' : '/sign-in')
+			navigate(type === 'signup' ? '/sign-up' : '/sign-in')
 		}
 	}, [])
 
@@ -114,7 +121,7 @@ const Verify = ({ onSuccess, type = 'sign-in', action }) => {
 		<div className='w-full max-w-md mx-auto'>
 			<div className='mb-10'>
 				<h2 className='text-4xl font-bold text-slate-900 mb-4'>
-					{type === 'sign-up' ? 'Confirm Registration' : 'Verify Login'}
+					{type === 'signup' ? 'Confirm Registration' : 'Verify Login'}
 				</h2>
 				<p className='text-slate-500 text-lg'>
 					We&apos;ve sent a 6-digit code to your email. Please enter it below.

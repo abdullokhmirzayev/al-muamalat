@@ -86,12 +86,20 @@ const SignUpPage = () => {
 				</div>
 
 				<AuthInput
-					name='phoneNumber'
 					type='tel'
 					placeholder='+998901234567'
 					Icon={Phone}
-					{...register('phone_number')}
+					{...register('phone_number', {
+						required: 'Phone number is required',
+						pattern: {
+							value: /^\+998[0-9]{9}$/,
+							message: 'Phone number must be in the format +998901234567',
+						},
+					})}
 				/>
+				{errors.phone_number && (
+					<p className='text-red-500 text-sm'>{errors.phone_number.message}</p>
+				)}
 
 				<Button
 					type='submit'

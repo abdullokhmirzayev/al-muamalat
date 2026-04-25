@@ -7,7 +7,7 @@ const AuthLayout = () => {
 	return (
 		<main className='min-h-screen flex'>
 			{/* ========== LEFT SIDE ========== */}
-			<div className='flex-1 flex flex-col px-10 py-8 md:px-16'>
+			<section className='flex-1 flex flex-col px-10 py-8 md:px-16'>
 				{/* Yuqori qism (Nav) - Har doim bir xil */}
 				<div className='flex items-center justify-between mt-24'>
 					<a href='/' className='flex items-center gap-2 w-59.75 h-14'>
@@ -30,10 +30,10 @@ const AuthLayout = () => {
 				</div>
 
 				{/* O'zgaruvchan Form qismi */}
-				<div className='flex-1 flex flex-col justify-center max-w-lg'>
+				<div className='flex-1 flex flex-col justify-center  max-w-lg'>
 					<Outlet />
 				</div>
-			</div>
+			</section>
 
 			{/* O'ng taraf - Har doim bir xil */}
 			<SingPageRight />
