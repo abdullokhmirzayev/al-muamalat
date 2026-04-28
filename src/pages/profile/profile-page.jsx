@@ -1,0 +1,63 @@
+import { request } from '@/services/request'
+import { useMutation, useQuery } from '@tanstack/react-query'
+import { useEffect } from 'react'
+import { useForm } from 'react-hook-form'
+import ProfileCourses from './components/courses'
+import ProfileInfo from './components/profile-info'
+
+const ProfilePage = () => {
+	const { data: apiResponse, isLoading } = useQuery({
+		queryKey: ['userData'],
+		queryFn: () => request.get('/users/me').then(res => res.data),
+	})
+
+	const user = apiResponse?.data
+
+	const { register, handleSubmit, reset } = useForm({
+		defaultValues: {
+			full_name: '',
+			address: '',
+			password: '',
+			phone_number: '',
+		},
+	})
+
+	useEffect(() => {
+		if (user) {
+			reset({
+				full_name: user.full_name || '',
+				address: user.address || '',
+				phone_number: user.phone_number || '',
+			})
+		}
+	}, [user, reset])
+
+	const onSubmit = formData => {
+		console.log("Yangilangan ma'lumotlar:", formData)
+	}
+
+	if (isLoading) return <div className='p-10 text-center'>Yuklanmoqda...</div>
+
+	return (
+		<div className='p-8 max-w-6xl mx-auto'>
+			<header className='mb-8'>
+				<h1 className='text-2xl font-bold text-slate-900'>My profile</h1>
+				<p className='text-slate-500'>
+					Manage personal information and purchased courses
+				</p>
+			</header>
+
+			<div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
+				<ProfileInfo
+					user={user}
+					onSubmit={handleSubmit(onSubmit)}
+					register={register}
+				/>
+
+				<ProfileCourses />
+			</div>
+		</div>
+	)
+}
+
+export default ProfilePage

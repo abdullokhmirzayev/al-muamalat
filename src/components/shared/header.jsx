@@ -18,6 +18,7 @@ import {
 } from '@/components/ui/navigation-menu'
 import { cn } from '@/lib/utils'
 import { ChevronDown } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 // images
 import useFlag from '@/assets/en.png'
@@ -172,11 +173,11 @@ const Header = () => {
 
 					<div className='h-8 w-[1.5px] bg-gray-200 mx-3' />
 
-					<a href='/sign-in'>
+					<Link to='/sign-in'>
 						<Button className='bg-[#00897B] cursor-pointer hover:bg-[#00796B] text-white px-7 py-5 rounded-[10px] text-[15px] font-medium transition-all shadow-sm active:scale-95 curpo'>
 							Sign in
 						</Button>
-					</a>
+					</Link>
 				</div>
 			</div>
 		</header>

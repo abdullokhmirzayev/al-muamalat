@@ -4,7 +4,7 @@ import { router } from './routes'
 
 export default function App() {
 	return (
-		<div className=''>
+		<div>
 			<RouterProvider router={router} />
 			<ToastContainer />
 		</div>

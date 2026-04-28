@@ -19,8 +19,6 @@ const AuthProvider = ({ children }) => {
 	const [user, setUser] = useState(defaultProvider.user)
 	const [loading, setLoading] = useState(defaultProvider.loading)
 
-	console.log(user)
-
 	const handleLogin = (params, callback) => {
 		setLoading(true)
 		request
@@ -135,7 +133,6 @@ const AuthProvider = ({ children }) => {
 			})
 			.catch(error => {
 				toast.error(error.response?.data?.message || 'Forgot password failed')
-				
 			})
 			.finally(() => {
 				setLoading(false)

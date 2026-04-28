@@ -1,22 +1,26 @@
-import AuthLayout from '@/components/layouts/auth-layout'
-import RootLayout from '@/components/layouts/root-layout'
-import { ConfirmPasswordForm } from '@/components/pages/auth/components/confirm-password'
-import { ForgotPassword } from '@/components/pages/auth/forgot-password'
-import { VerifySignInPage } from '@/components/pages/auth/verify-sign-in'
-import { VerifySignUpPage } from '@/components/pages/auth/verify-sign-up'
+import { ConfirmPasswordForm } from '@/pages/auth/components/confirm-password'
+import { ForgotPassword } from '@/pages/auth/forgot-password-page'
+import { VerifySignInPage } from '@/pages/auth/verify-sign-in-page'
+import { VerifySignUpPage } from '@/pages/auth/verify-sign-up-page'
+import ProfilePage from '@/pages/profile/profile-page'
 import { lazy } from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 
 // import layzy pages
-const Home = lazy(() => import('@/components/pages/home/home'))
-const SignIn = lazy(() => import('@/components/pages/auth/sign-in'))
-const SignUp = lazy(() => import('@/components/pages/auth/sign-up'))
+const RootLayout = lazy(() => import('@/layouts/root-layout'))
+const Home = lazy(() => import('@/pages/home/home-page'))
+const AuthLayout = lazy(() => import('@/layouts/auth-layout'))
+const SignIn = lazy(() => import('@/pages/auth/sign-in-page'))
+const SignUp = lazy(() => import('@/pages/auth/sign-up-page'))
 
 export const router = createBrowserRouter([
 	{
 		path: '/',
 		element: <RootLayout />, // Endi bu yerda xato bermaydi
-		children: [{ index: true, element: <Home /> }],
+		children: [
+			{ index: true, element: <Home /> },
+			{ path: '/profile', element: <ProfilePage /> },
+		],
 	},
 	{
 		element: <AuthLayout />,
