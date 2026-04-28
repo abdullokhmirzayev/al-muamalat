@@ -2,6 +2,7 @@ import { request } from '@/services/request'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
 import ProfileCourses from './components/courses'
 import ProfileInfo from './components/profile-info'
 
@@ -12,6 +13,19 @@ const ProfilePage = () => {
 	})
 
 	const user = apiResponse?.data
+
+	console.log(user)
+
+	const { mutate } = useMutation({
+		mutationKey: ['user', user?.user_id],
+		mutationFn: data => request.put(`/users/${user?.user_id}`, data),
+		onSuccess: () => {
+			toast.success('Changes saved successfully')
+		},
+		onError: error => {
+			toast.error(error.message)
+		},
+	})
 
 	const { register, handleSubmit, reset } = useForm({
 		defaultValues: {
@@ -34,6 +48,7 @@ const ProfilePage = () => {
 
 	const onSubmit = formData => {
 		console.log("Yangilangan ma'lumotlar:", formData)
+		mutate(formData)
 	}
 
 	if (isLoading) return <div className='p-10 text-center'>Yuklanmoqda...</div>

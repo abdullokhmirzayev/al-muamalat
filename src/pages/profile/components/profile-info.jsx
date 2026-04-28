@@ -1,12 +1,12 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { LogOut, Save, UserCircle } from 'lucide-react' // Save iconini qo'shdik
+import { Eye, EyeOff, LogOut, Save, UserCircle } from 'lucide-react'
 import { useState } from 'react'
 
 const ProfileInfo = ({ user, onSubmit, register }) => {
-	// Tahrirlash holatini boshqarish uchun state
 	const [isEditing, setIsEditing] = useState(false)
+	const [showPassword, setShowPassword] = useState(false)
 
 	const handleEditClick = e => {
 		e.preventDefault()
@@ -44,7 +44,7 @@ const ProfileInfo = ({ user, onSubmit, register }) => {
 					</Label>
 					<Input
 						{...register('full_name')}
-						disabled={!isEditing} // Statega qarab boshqariladi
+						disabled={!isEditing}
 						className={`h-12 rounded-[10px] border-none ${!isEditing ? 'bg-slate-50' : 'bg-white ring-1 ring-slate-200'}`}
 					/>
 				</div>
@@ -67,30 +67,42 @@ const ProfileInfo = ({ user, onSubmit, register }) => {
 					<Label className='text-[10px] uppercase font-bold text-slate-400'>
 						Enter password
 					</Label>
-					<Input
-						type='password'
-						{...register('password')}
-						placeholder='Password'
-						disabled={!isEditing}
-						className={`h-12 rounded-[10px] border-none ${!isEditing ? 'bg-slate-50' : 'bg-white ring-1 ring-slate-200'}`}
-					/>
+					<div className='relative flex items-center'>
+						<Input
+							type={showPassword ? 'text' : 'password'}
+							{...register('password')}
+							placeholder='Password'
+							disabled={!isEditing}
+							className={`h-12 rounded-[10px] border-none pr-10 w-full ${
+								!isEditing ? 'bg-slate-50' : 'bg-white ring-1 ring-slate-200'
+							}`}
+						/>
+						{/* Faqat tahrirlash rejimida ko'zcha chiqadi */}
+						{isEditing && (
+							<button
+								type='button'
+								onClick={() => setShowPassword(!showPassword)}
+								className='absolute right-3 text-slate-400 hover:text-slate-600 cursor-pointer p-1'
+							>
+								{showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+							</button>
+						)}
+					</div>
 				</div>
 
-				{/* Telefon (Odatda o'zgartirib bo'lmaydi, shuning uchun doim disabled qoldirishingiz mumkin) */}
 				<div className='space-y-1'>
 					<Label className='text-[10px] uppercase font-bold text-slate-400'>
 						Your phone number
 					</Label>
 					<Input
 						{...register('phone_number')}
-						disabled
-						className='bg-slate-50 border-none h-12 text-slate-400'
+						disabled={!isEditing}
+						className={`h-12 rounded-[10px] border-none ${!isEditing ? 'bg-slate-50' : 'bg-white ring-1 ring-slate-200'}`}
 					/>
 				</div>
 
 				<div className='pt-4'>
 					{isEditing ? (
-						/* Tahrirlash rejimidagi SAVE tugmasi */
 						<Button
 							type='submit'
 							className='w-full bg-[#009688] hover:bg-teal-700 h-12 rounded-xl text-white font-semibold'
@@ -98,7 +110,6 @@ const ProfileInfo = ({ user, onSubmit, register }) => {
 							<Save className='w-4 h-4 mr-2' /> Save Changes
 						</Button>
 					) : (
-						/* Oddiy holatdagi UPDATE va LOGOUT tugmalari */
 						<div className='flex gap-3'>
 							<Button
 								type='button'

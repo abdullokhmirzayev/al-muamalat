@@ -24,8 +24,15 @@ import { Link } from 'react-router-dom'
 import useFlag from '@/assets/en.png'
 import Logo from '@/assets/logo.png'
 import uzbFlag from '@/assets/uzb.png'
+import { request } from '@/services/request'
+import { useQuery } from '@tanstack/react-query'
 
 const Header = () => {
+	const { data, isLoading, isError } = useQuery({
+		queryKey: ['userData'],
+		queryFn: () => request.get('/users/me').then(res => res.data),
+	})
+
 	return (
 		<header className='fixed  ring-0 left-0 w-full border-b bg-white z-50 shadow-[0px_6px_12px_0px_#0000001A]'>
 			<div className='container mx-auto flex h-20 items-center justify-between px-4'>
@@ -173,11 +180,23 @@ const Header = () => {
 
 					<div className='h-8 w-[1.5px] bg-gray-200 mx-3' />
 
-					<Link to='/sign-in'>
-						<Button className='bg-[#00897B] cursor-pointer hover:bg-[#00796B] text-white px-7 py-5 rounded-[10px] text-[15px] font-medium transition-all shadow-sm active:scale-95 curpo'>
-							Sign in
-						</Button>
-					</Link>
+					{data?.data.user_id ? (
+						<>
+							<Link to='/profile'>
+								<Button className='bg-[#00897B] cursor-pointer hover:bg-[#00796B] text-white px-7 py-5 rounded-[10px] text-[15px] font-medium transition-all shadow-sm active:scale-95 curpo'>
+									Profile
+								</Button>
+							</Link>
+						</>
+					) : (
+						<>
+							<Link to='/sign-in'>
+								<Button className='bg-[#00897B] cursor-pointer hover:bg-[#00796B] text-white px-7 py-5 rounded-[10px] text-[15px] font-medium transition-all shadow-sm active:scale-95 curpo'>
+									Sign in
+								</Button>
+							</Link>
+						</>
+					)}
 				</div>
 			</div>
 		</header>

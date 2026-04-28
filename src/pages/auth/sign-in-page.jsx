@@ -70,7 +70,7 @@ const SignInPage = () => {
 						<Label htmlFor='password'>Password</Label>
 						<Link
 							to={'/forgot-password'}
-							className='text-sm text-blue-300 hover:underline'
+							className='text-sm text-[#009688] hover:underline'
 						>
 							Forgot password?
 						</Link>

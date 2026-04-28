@@ -16,7 +16,7 @@ const SignUp = lazy(() => import('@/pages/auth/sign-up-page'))
 export const router = createBrowserRouter([
 	{
 		path: '/',
-		element: <RootLayout />, // Endi bu yerda xato bermaydi
+		element: <RootLayout />,
 		children: [
 			{ index: true, element: <Home /> },
 			{ path: '/profile', element: <ProfilePage /> },
@@ -25,8 +25,8 @@ export const router = createBrowserRouter([
 	{
 		element: <AuthLayout />,
 		children: [
-			{ path: 'sign-in', element: <SignIn /> },
-			{ path: 'sign-up', element: <SignUp /> },
+			{ path: '/sign-in', element: <SignIn /> },
+			{ path: '/sign-up', element: <SignUp /> },
 			{ path: '/verify-sign-in', element: <VerifySignInPage /> },
 			{ path: '/verify-sign-up', element: <VerifySignUpPage /> },
 			{ path: '/forgot-password', element: <ForgotPassword /> },
