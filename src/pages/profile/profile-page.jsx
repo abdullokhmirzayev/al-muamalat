@@ -16,7 +16,7 @@ const ProfilePage = () => {
 
 	console.log(user)
 
-	const { mutate } = useMutation({
+	const { mutate: updateMutate } = useMutation({
 		mutationKey: ['user', user?.user_id],
 		mutationFn: data => request.put(`/users/${user?.user_id}`, data),
 		onSuccess: () => {
@@ -47,11 +47,28 @@ const ProfilePage = () => {
 	}, [user, reset])
 
 	const onSubmit = formData => {
-		console.log("Yangilangan ma'lumotlar:", formData)
-		mutate(formData)
+		updateMutate(formData)
 	}
 
 	if (isLoading) return <div className='p-10 text-center'>Yuklanmoqda...</div>
+
+	// logout
+	const { mutate: logoutMutate, isLoading: isLogoutLoading } = useMutation({
+		mutationKey: ['logout'],
+		mutationFn: () =>
+			request.post('/v2/auth/logout', {
+				refreshToken: localStorage.getItem('refreshToken'),
+			}),
+		onSuccess: () => {
+			localStorage.clear()
+			toast.success('Logout successfully')
+			window.location.href = '/sign-in'
+		},
+	})
+
+	const handleLogout = () => {
+		logoutMutate()
+	}
 
 	return (
 		<div className='p-8 max-w-6xl mx-auto'>
@@ -67,6 +84,8 @@ const ProfilePage = () => {
 					user={user}
 					onSubmit={handleSubmit(onSubmit)}
 					register={register}
+					handleLogout={handleLogout}
+					isLogoutLoading={isLogoutLoading}
 				/>
 
 				<ProfileCourses />

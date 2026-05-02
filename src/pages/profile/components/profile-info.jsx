@@ -4,7 +4,13 @@ import { Label } from '@/components/ui/label'
 import { Eye, EyeOff, LogOut, Save, UserCircle } from 'lucide-react'
 import { useState } from 'react'
 
-const ProfileInfo = ({ user, onSubmit, register }) => {
+const ProfileInfo = ({
+	user,
+	onSubmit,
+	register,
+	handleLogout,
+	isLogoutLoading,
+}) => {
 	const [isEditing, setIsEditing] = useState(false)
 	const [showPassword, setShowPassword] = useState(false)
 
@@ -122,6 +128,8 @@ const ProfileInfo = ({ user, onSubmit, register }) => {
 								type='button'
 								variant='outline'
 								className='flex-1 border-slate-200 h-12 rounded-xl text-slate-600'
+								onClick={handleLogout}
+								disabled={isLogoutLoading}
 							>
 								<LogOut className='w-4 h-4 mr-2' /> Log out
 							</Button>
