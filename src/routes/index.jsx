@@ -3,6 +3,7 @@ import { ForgotPassword } from '@/pages/auth/forgot-password-page'
 import { VerifySignInPage } from '@/pages/auth/verify-sign-in-page'
 import { VerifySignUpPage } from '@/pages/auth/verify-sign-up-page'
 import ProfilePage from '@/pages/profile/profile-page'
+import InternEdu from '@/pages/programs/intern-edu/intern-edu-page'
 import { lazy } from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 
@@ -20,6 +21,7 @@ export const router = createBrowserRouter([
 		children: [
 			{ index: true, element: <Home /> },
 			{ path: '/profile', element: <ProfilePage /> },
+			{ path: '/international-educational-programs', element: <InternEdu /> },
 		],
 	},
 	{

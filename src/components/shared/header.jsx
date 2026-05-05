@@ -26,15 +26,36 @@ import Logo from '@/assets/logo.png'
 import uzbFlag from '@/assets/uzb.png'
 import { request } from '@/services/request'
 import { useQuery } from '@tanstack/react-query'
+import { useEffect, useState } from 'react'
 
 const Header = () => {
-	const { data, isLoading, isError } = useQuery({
+	const { data } = useQuery({
 		queryKey: ['userData'],
 		queryFn: () => request.get('/users/me').then(res => res.data),
 	})
 
+	const [isScrolled, setIsScrolled] = useState(false)
+
+	useEffect(() => {
+		const handleScroll = () => {
+			if (window.scrollY > 5) {
+				setIsScrolled(true)
+			} else {
+				setIsScrolled(false)
+			}
+		}
+
+		window.addEventListener('scroll', handleScroll)
+		return () => window.removeEventListener('scroll', handleScroll)
+	}, [])
+
 	return (
-		<header className='fixed  ring-0 left-0 w-full border-b bg-white z-50 shadow-[0px_6px_12px_0px_#0000001A]'>
+		<header
+			className={cn(
+				'fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-white/80 backdrop-blur-md',
+				isScrolled && 'border-b shadow-[0px_6px_12px_0px_#0000001A] py-0',
+			)}
+		>
 			<div className='container mx-auto flex h-20 items-center justify-between px-4'>
 				{/* Logo Qismi */}
 				<a
