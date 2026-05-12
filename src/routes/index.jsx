@@ -2,8 +2,6 @@ import { ConfirmPasswordForm } from '@/pages/auth/components/confirm-password'
 import { ForgotPassword } from '@/pages/auth/forgot-password-page'
 import { VerifySignInPage } from '@/pages/auth/verify-sign-in-page'
 import { VerifySignUpPage } from '@/pages/auth/verify-sign-up-page'
-import ProfilePage from '@/pages/profile/profile-page'
-import InternEdu from '@/pages/programs/intern-edu/intern-edu-page'
 import { lazy } from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 
@@ -13,6 +11,8 @@ const Home = lazy(() => import('@/pages/home/home-page'))
 const AuthLayout = lazy(() => import('@/layouts/auth-layout'))
 const SignIn = lazy(() => import('@/pages/auth/sign-in-page'))
 const SignUp = lazy(() => import('@/pages/auth/sign-up-page'))
+const Profile = lazy(() => import('@/pages/profile/profile-page'))
+const Program = lazy(() => import('@/pages/programs/program'))
 
 export const router = createBrowserRouter([
 	{
@@ -20,8 +20,9 @@ export const router = createBrowserRouter([
 		element: <RootLayout />,
 		children: [
 			{ index: true, element: <Home /> },
-			{ path: '/profile', element: <ProfilePage /> },
-			{ path: '/international-educational-programs', element: <InternEdu /> },
+			{ path: '/profile', element: <Profile /> },
+			{ path: '/programs', element: <Program /> },
+			{ path: '/programs/:courseId', element: <Program /> },
 		],
 	},
 	{

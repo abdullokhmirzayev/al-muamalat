@@ -49,6 +49,10 @@ const Header = () => {
 		return () => window.removeEventListener('scroll', handleScroll)
 	}, [])
 
+	const { data: courseList } = useQuery({
+		queryKey: ['course-list'],
+		queryFn: () => request.get('/courses/main').then(res => res.data),
+	})
 	return (
 		<header
 			className={cn(
@@ -87,44 +91,21 @@ const Header = () => {
 								Programs
 							</NavigationMenuTrigger>
 							<NavigationMenuContent>
-								{/* Konteyner o'lchamlarini moslashtiramiz */}
-								<ul className='w-72'>
-									{/* O'ng tomondagi boyagi ro'yxat qismi */}
-									<div className='flex flex-col'>
-										{[
-											{
-												title: 'International educational programs',
-												href: '/international-educational-programs',
-												active: false,
-											},
-											{ title: 'Specialized courses', href: '/p2' },
-											{ title: 'Islamic Finance Literacy Course', href: '/p3' },
-											{ title: 'Certification program', href: '/p4' },
-										].map((item, index, array) => (
-											<li key={index} className='w-full'>
-												<NavigationMenuLink asChild>
-													<a
-														href={item.href}
-														className={`
-                  block select-none py-3 px-3 no-underline outline-none transition-colors rounded-sm
-                  hover:bg-slate-50 group
-                  ${index !== array.length - 1 ? 'border-b border-gray-100' : ''}
-                `}
-													>
-														<span
-															className={`text-[14px] font-medium leading-none transition-colors ${
-																item.active
-																	? 'text-[#00897B]'
-																	: 'text-gray-500 group-hover:text-[#00897B]'
-															}`}
-														>
-															{item.title}
-														</span>
-													</a>
-												</NavigationMenuLink>
-											</li>
-										))}
-									</div>
+								<ul className='flex flex-col w-75 p-2'>
+									{courseList?.data?.map(course => (
+										<li key={course?.course_id} className='w-full'>
+											<NavigationMenuLink asChild>
+												<Link
+													to={`/programs/${course?.course_id}`}
+													className='flex flex-col gap-1 rounded-md p-3 transition-all hover:bg-slate-100 hover:text-accent-foreground focus:bg-slate-100 outline-none'
+												>
+													<div className='text-sm font-medium leading-none'>
+														{course.name_uz}
+													</div>
+												</Link>
+											</NavigationMenuLink>
+										</li>
+									))}
 								</ul>
 							</NavigationMenuContent>
 						</NavigationMenuItem>
