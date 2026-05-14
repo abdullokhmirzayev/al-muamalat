@@ -14,8 +14,6 @@ const ProfilePage = () => {
 
 	const user = apiResponse?.data
 
-	console.log(user)
-
 	const { mutate: updateMutate } = useMutation({
 		mutationKey: ['user', user?.user_id],
 		mutationFn: data => request.put(`/users/${user?.user_id}`, data),
@@ -50,8 +48,6 @@ const ProfilePage = () => {
 		updateMutate(formData)
 	}
 
-	if (isLoading) return <div className='p-10 text-center'>Yuklanmoqda...</div>
-
 	// logout
 	const { mutate: logoutMutate, isLoading: isLogoutLoading } = useMutation({
 		mutationKey: ['logout'],
@@ -70,6 +66,15 @@ const ProfilePage = () => {
 		logoutMutate()
 	}
 
+	const {
+		data: coursesMy,
+		isLoading: isLoadingCoursesMy,
+		isError: isErrorCoursesMy,
+	} = useQuery({
+		queryKey: ['courses-my'],
+		queryFn: () => request.get('/courses/my').then(res => res.data),
+	})
+
 	return (
 		<div className='p-8 max-w-6xl mx-auto'>
 			<header className='mb-8'>
@@ -83,12 +88,18 @@ const ProfilePage = () => {
 				<ProfileInfo
 					user={user}
 					onSubmit={handleSubmit(onSubmit)}
+					handleSubmit={handleSubmit}
 					register={register}
 					handleLogout={handleLogout}
 					isLogoutLoading={isLogoutLoading}
 				/>
 
-				<ProfileCourses />
+				<ProfileCourses
+					courses={coursesMy}
+					isLoading={isLoadingCoursesMy}
+					isError={isErrorCoursesMy}
+					userId={user?.user_id}
+				/>
 			</div>
 		</div>
 	)

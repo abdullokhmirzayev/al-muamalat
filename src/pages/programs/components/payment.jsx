@@ -1,8 +1,6 @@
-import { request } from '@/services/request'
-import { useMutation } from '@tanstack/react-query'
+import { useMakePayment } from '@/hooks/use-make-payment'
 import { Check } from 'lucide-react'
 import { useForm } from 'react-hook-form'
-import { toast } from 'react-toastify'
 
 const Payment = ({ courseId, userId }) => {
 	const services = [
@@ -32,37 +30,14 @@ const Payment = ({ courseId, userId }) => {
 
 	const { handleSubmit } = useForm()
 
-	const { mutate } = useMutation({
-		mutationKey: ['payment'],
-		mutationFn: payload => request.post('/courses/user', payload),
-		onSuccess: res => {
-			toast.success('Successful')
-
-			request.get(`/courses/purchase/${res?.data?.data?.id}`).then(res => {
-				const url = res.data?.data?.data
-
-				if (url) {
-					const aTeg = document.createElement('a')
-					aTeg.href = url
-					aTeg.target = '_blank'
-					document.body.append(aTeg)
-					aTeg.click()
-					aTeg.remove()
-				}
-			})
-		},
-
-		onError: error => {
-			toast.error(error.message)
-		},
-	})
+	const { makePayment, isLoading } = useMakePayment()
 
 	const onSubmit = () => {
 		const submitData = {
 			course_id: courseId,
 			user_id: userId,
 		}
-		mutate(submitData)
+		makePayment(submitData)
 	}
 
 	return (
@@ -110,10 +85,11 @@ const Payment = ({ courseId, userId }) => {
 
 					<div className='mt-12'>
 						<button
+							disabled={isLoading}
 							onClick={handleSubmit(onSubmit)}
 							className='bg-[#009485] hover:bg-[#007a6e] text-white font-bold py-3.5 px-12 rounded-md transition-all cursor-pointer'
 						>
-							Purchase Now
+							{isLoading ? 'Processing...' : 'Purchase Now'}
 						</button>
 					</div>
 				</div>

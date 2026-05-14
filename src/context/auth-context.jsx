@@ -27,6 +27,7 @@ const AuthProvider = ({ children }) => {
 				localStorage.setItem('tempEmail', params.email)
 				setUser({ email: params.email })
 				if (callback) callback()
+				toast.success('Login successful!')
 			})
 			.catch(error => {
 				toast.error(error.response?.data?.message || 'Login failed')
@@ -74,6 +75,7 @@ const AuthProvider = ({ children }) => {
 			})
 			.catch(error => {
 				console.log(error)
+				toast.error(error.response?.data?.message || 'Sign up failed')
 			})
 			.finally(() => {
 				setLoading(false)
