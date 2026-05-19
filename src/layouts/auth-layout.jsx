@@ -1,7 +1,7 @@
 import AvatarImg1 from '@/assets/avatar1.png'
 import Logo from '@/assets/logo.png'
 import { Outlet } from 'react-router-dom'
-import SingPageRight from '../pages/auth/components/sign-right'
+import SingPageRight from '../pages/site/auth/components/sign-right'
 
 const AuthLayout = () => {
 	return (
