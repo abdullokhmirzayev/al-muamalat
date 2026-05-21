@@ -1,8 +1,15 @@
 import DashboardHeader from '@/pages/dashboard/dashboard-home/components/dashboard-header'
 import Sidebar from '@/pages/dashboard/dashboard-home/components/sidebar'
-import { Outlet } from 'react-router-dom'
+import { Suspense } from 'react'
+import { Navigate, Outlet } from 'react-router-dom'
 
 export default function DashboardLayout() {
+	const token = localStorage.getItem('dashboardToken')
+
+	if (!token) {
+		return <Navigate to='/dashboard/login' replace />
+	}
+
 	return (
 		<div className='flex h-screen overflow-hidden bg-slate-50'>
 			{/* Chap tomondagi doimiy menyu */}
@@ -14,7 +21,9 @@ export default function DashboardLayout() {
 
 				{/* Sahifalar shu yerga yuklanadi */}
 				<main className='p-6'>
-					<Outlet />
+					<Suspense fallback={<div>Loading...</div>}>
+						<Outlet />
+					</Suspense>
 				</main>
 			</div>
 		</div>

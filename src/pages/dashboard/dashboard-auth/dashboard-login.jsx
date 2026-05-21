@@ -1,7 +1,7 @@
 import Logo from '@/assets/logo.png'
 import { Button } from '@/components/ui/button'
-import { Checkbox } from '@/components/ui/checkbox'
 import { Input } from '@/components/ui/input'
+import { useDashboardAuth } from '@/hooks/use-dashboard-auth'
 import { Eye, EyeOff } from 'lucide-react'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -10,36 +10,21 @@ import { Link } from 'react-router-dom'
 export default function SignInPage() {
 	const [showPassword, setShowPassword] = useState(false)
 
-	// react-hook-form ni sozlash
 	const {
 		register,
 		handleSubmit,
-		setValue,
-		watch,
 		formState: { errors, isSubmitting },
 	} = useForm({
 		defaultValues: {
 			phone_number: '',
 			password: '',
-			rememberMe: false,
 		},
 	})
 
-	const rememberMeValue = watch('rememberMe')
+	const { mutate, isPending, isError } = useDashboardAuth()
 
 	const onSubmit = async data => {
-		try {
-			const formData = new FormData()
-			formData.append('phone_number', data.phone_number)
-			formData.append('password', data.password)
-
-			console.log('Backendga yuborishga tayyor FormData tarkibi:')
-			for (let pair of formData.entries()) {
-				console.log(pair[0] + ': ' + pair[1])
-			}
-		} catch (error) {
-			console.error('Xatolik yuz berdi:', error)
-		}
+		mutate(data)
 	}
 
 	return (
@@ -54,10 +39,8 @@ export default function SignInPage() {
 				</a>
 			</div>
 
-			{/* Form bloki */}
 			<div className='w-full max-w-105'>
 				<form onSubmit={handleSubmit(onSubmit)} className='space-y-5'>
-					{/* Phone Number Input */}
 					<div className='space-y-2'>
 						<label
 							htmlFor='phone_number'
@@ -68,7 +51,7 @@ export default function SignInPage() {
 						<Input
 							id='phone_number'
 							type='text'
-							placeholder='998999111113'
+							placeholder='9981234567'
 							className={`h-12 border-slate-300 bg-slate-50/50 px-4 rounded-lg focus-visible:ring-[#1D9488] ${
 								errors.phone_number
 									? 'border-red-500 focus-visible:ring-red-500'
@@ -89,7 +72,6 @@ export default function SignInPage() {
 						)}
 					</div>
 
-					{/* Password Input */}
 					<div className='space-y-2'>
 						<div className='flex items-center justify-between'>
 							<label
@@ -143,33 +125,15 @@ export default function SignInPage() {
 						)}
 					</div>
 
-					{/* Keep me signed in (Shadcn Checkbox + Hook Form integratsiyasi) */}
-					<div className='flex items-center space-x-2.5 py-1'>
-						<Checkbox
-							id='rememberMe'
-							checked={rememberMeValue}
-							onCheckedChange={checked => setValue('rememberMe', !!checked)}
-							className='h-5 w-5 border-slate-300 rounded data-[state=checked]:bg-[#1D9488] data-[state=checked]:border-[#1D9488]'
-						/>
-						<label
-							htmlFor='rememberMe'
-							className='text-sm font-medium text-slate-600 cursor-pointer select-none'
-						>
-							Keep me signed in
-						</label>
-					</div>
-
-					{/* Login Button */}
 					<Button
 						type='submit'
 						disabled={isSubmitting}
-						className='w-full h-12 bg-[#1D9488] hover:bg-[#17796F] text-white font-semibold text-base rounded-lg transition-colors shadow-sm disabled:opacity-70'
+						className='w-full h-12 bg-[#1D9488] hover:bg-[#17796F] text-white font-semibold text-base rounded-lg transition-colors shadow-sm disabled:opacity-70 cursor-pointer'
 					>
-						{isSubmitting ? 'Yuklanmoqda...' : 'Login'}
+						{isPending ? 'Yuklanmoqda...' : 'Login'}
 					</Button>
 				</form>
 
-				{/* Create Account Link */}
 				<div className='mt-8 text-center'>
 					<Link
 						to='/sign-up'
