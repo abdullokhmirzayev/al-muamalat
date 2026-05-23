@@ -1,4 +1,4 @@
-import DashnoardSettings from '@/pages/dashboard/dashboard-home/dashnoard-settings'
+import DashnoardSettings from '@/pages/dashboard/dashnoard-settings/dashnoard-settings'
 import { lazy } from 'react'
 
 const DashboardLayout = lazy(() => import('@/layouts/dashboard-layout'))
