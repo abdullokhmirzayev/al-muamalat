@@ -1,13 +1,13 @@
 import Logo from '@/assets/logo.png'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { useDashboardAuth } from '@/hooks/use-dashboard-auth'
+import { useDashboardRegester } from '@/hooks/use-dashboard-auth'
 import { Eye, EyeOff } from 'lucide-react'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 
-export default function SignInPage() {
+export default function SignUpPage() {
 	const [showPassword, setShowPassword] = useState(false)
 
 	const {
@@ -16,12 +16,14 @@ export default function SignInPage() {
 		formState: { errors, isSubmitting },
 	} = useForm({
 		defaultValues: {
+			full_name: '',
 			phone_number: '',
 			password: '',
 		},
 	})
 
-	const { mutate, isPending, isError } = useDashboardAuth()
+	// Yangi Register hookini chaqiramiz
+	const { mutate, isPending } = useDashboardRegester()
 
 	const onSubmit = async data => {
 		mutate(data)
@@ -33,14 +35,50 @@ export default function SignInPage() {
 			<div className='mb-10 text-center select-none'>
 				<a
 					href='/'
-					className='flex items-center gap-2 group relative w-59.75 h-14'
+					className='flex items-center justify-center gap-2 group relative h-14'
 				>
-					<img src={Logo} alt='Logo' className='object-contain' />
+					<img src={Logo} alt='Logo' className='object-contain h-full' />
 				</a>
+				<h2 className='mt-4 text-xl font-bold text-slate-700'>
+					Create an account
+				</h2>
 			</div>
 
 			<div className='w-full max-w-105'>
 				<form onSubmit={handleSubmit(onSubmit)} className='space-y-5'>
+					{/* Full Name */}
+					<div className='space-y-2'>
+						<label
+							htmlFor='full_name'
+							className='text-sm font-semibold text-slate-700'
+						>
+							Full Name
+						</label>
+						<Input
+							id='full_name'
+							type='text'
+							placeholder='John Doe'
+							className={`h-12 border-slate-300 bg-slate-50/50 px-4 rounded-lg focus-visible:ring-[#1D9488] ${
+								errors.full_name
+									? 'border-red-500 focus-visible:ring-red-500'
+									: ''
+							}`}
+							{...register('full_name', {
+								required: 'Ism-sharif kiritilishi shart',
+								minLength: {
+									value: 3,
+									message: "Ism kamida 3 ta belgidan iborat bo'lsin",
+								},
+							})}
+						/>
+						{errors.full_name && (
+							<p className='text-xs font-medium text-red-500 mt-1'>
+								{errors.full_name.message}
+							</p>
+						)}
+					</div>
+
+					{/* Phone Number */}
 					<div className='space-y-2'>
 						<label
 							htmlFor='phone_number'
@@ -51,7 +89,7 @@ export default function SignInPage() {
 						<Input
 							id='phone_number'
 							type='text'
-							placeholder='9981234567'
+							placeholder='9989016935'
 							className={`h-12 border-slate-300 bg-slate-50/50 px-4 rounded-lg focus-visible:ring-[#1D9488] ${
 								errors.phone_number
 									? 'border-red-500 focus-visible:ring-red-500'
@@ -72,22 +110,14 @@ export default function SignInPage() {
 						)}
 					</div>
 
+					{/* Password */}
 					<div className='space-y-2'>
-						<div className='flex items-center justify-between'>
-							<label
-								htmlFor='password'
-								className='text-sm font-semibold text-slate-700'
-							>
-								Password
-							</label>
-							<Link
-								to='/forgot-password'
-								className='text-xs font-semibold text-[#1D9488] hover:underline'
-							>
-								Forgot Password?
-							</Link>
-						</div>
-
+						<label
+							htmlFor='password'
+							className='text-sm font-semibold text-slate-700'
+						>
+							Password
+						</label>
 						<div className='relative'>
 							<Input
 								id='password'
@@ -125,21 +155,24 @@ export default function SignInPage() {
 						)}
 					</div>
 
+					{/* Submit Button */}
 					<Button
 						type='submit'
-						disabled={isSubmitting}
-						className='w-full h-12 bg-[#1D9488] hover:bg-[#17796F] text-white font-semibold text-base rounded-lg transition-colors shadow-sm disabled:opacity-70 cursor-pointer'
+						disabled={isSubmitting || isPending}
+						className='w-full h-12 bg-[#1D9488] hover:bg-[#17796F] text-white font-semibold text-base rounded-lg transition-colors shadow-sm disabled:opacity-70 cursor-pointer mt-2'
 					>
-						{isPending ? 'Yuklanmoqda...' : 'Login'}
+						{isPending ? 'Yuklanmoqda...' : 'Create Account'}
 					</Button>
 				</form>
 
-				<div className='mt-8 text-center'>
+				{/* Back to Login Link */}
+				<div className='mt-8 text-center text-sm text-slate-600'>
+					Already have an account?{' '}
 					<Link
-						to='/dashboard/register'
-						className='text-sm font-bold text-[#1D9488] hover:underline'
+						to='/dashboard/login'
+						className='font-bold text-[#1D9488] hover:underline'
 					>
-						Create an account
+						Sign in
 					</Link>
 				</div>
 			</div>

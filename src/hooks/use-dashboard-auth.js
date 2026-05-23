@@ -28,3 +28,23 @@ export const useDashboardAuth = () => {
 		},
 	})
 }
+
+export const useDashboardRegester = () => {
+	const navigate = useNavigate()
+
+	return useMutation({
+		mutationFn: payload =>
+			dashboardRequest.post('auth/signup', payload).then(res => res.data),
+
+		onSuccess: data => {
+			console.log(data)
+			toast.success('Signup Successful')
+			navigate('/dashboard')
+		},
+
+		onError: error => {
+			console.log('Error: ', error.response?.data)
+			toast.error(error.response?.data?.message)
+		},
+	})
+}
