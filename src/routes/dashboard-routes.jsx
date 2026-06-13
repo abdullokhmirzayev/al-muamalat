@@ -14,6 +14,10 @@ const DashboardRegister = lazy(
 	() => import('@/pages/dashboard/dashboard-auth/dashboard-regester'),
 )
 
+const DashboardCourses = lazy(
+	() => import('@/pages/dashboard/courses/dashboard-courses'),
+)
+
 export const dashboardRoutes = [
 	{
 		path: '/dashboard/login',
@@ -31,6 +35,10 @@ export const dashboardRoutes = [
 			{
 				path: 'settings',
 				element: <DashboardSettings />,
+			},
+			{
+				path: 'courses',
+				element: <DashboardCourses />,
 			},
 		],
 	},

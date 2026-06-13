@@ -9,7 +9,7 @@ export default function DashboardHeader() {
 	})
 
 	return (
-		<header className='flex h-24 items-center justify-between px-8 bg-[#F8F9FA] border-b-2 border-gray-200'>
+		<header className='flex min-h-20 items-center justify-between px-8 bg-[#F8F9FA] border-b-2 border-gray-200'>
 			{/* Chap qism: Sarlavha va Sana */}
 			<div className='flex items-center gap-3 text-slate-400'>
 				<ChevronsRight className='h-5 w-5 hidden sm:block' />

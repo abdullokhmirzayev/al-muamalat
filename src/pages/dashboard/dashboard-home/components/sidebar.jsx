@@ -1,15 +1,11 @@
 import Logo from '@/assets/logo.png'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {
-	ArrowRightLeft,
+	BookOpen,
 	LayoutDashboard,
 	LogOut,
 	MoreVertical,
-	Receipt,
-	ReceiptText,
 	Settings,
-	Target,
-	Wallet,
 } from 'lucide-react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
@@ -20,15 +16,8 @@ export default function Sidebar() {
 	// Yon paneldagi menyu ro'yxati
 	const navItems = [
 		{ name: 'Overview', path: '/dashboard', icon: LayoutDashboard },
-		{ name: 'Balances', path: '/dashboard/balances', icon: Wallet },
-		{
-			name: 'Transactions',
-			path: '/dashboard/transactions',
-			icon: ArrowRightLeft,
-		},
-		{ name: 'Bills', path: '/dashboard/bills', icon: Receipt },
-		{ name: 'Expenses', path: '/dashboard/expenses', icon: ReceiptText },
-		{ name: 'Goals', path: '/dashboard/goals', icon: Target },
+		{ name: 'Courses', path: '/dashboard/courses', icon: BookOpen },
+
 		{ name: 'Settings', path: '/dashboard/settings', icon: Settings },
 	]
 
