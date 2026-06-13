@@ -1,7 +1,59 @@
 import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { dashboardRequest } from '@/services/dashboard-request'
+import { useQuery } from '@tanstack/react-query'
 import { ImagePlus } from 'lucide-react'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
 
 export default function AccountSettings() {
+	const [isUpdating, setIsUpdating] = useState(false)
+
+	const {
+		data: userData,
+		isLoading: userIsLoading,
+		isError: userIsError,
+	} = useQuery({
+		queryKey: ['dashboard-user'],
+		queryFn: async () => {
+			const response = await dashboardRequest('users/me').then(res => res.data)
+			return response
+		},
+	})
+
+	// const {} = useMutation({
+	// 	mutationFn: async () => {
+	// 		const req = await dashboardRequest.put(`users/${data.data.user_id}`)
+	// 		console.log(req)
+	// 	},
+	// })
+
+	console.log(userData)
+
+	const onUpdating = () => {
+		setIsUpdating(true)
+	}
+
+	const onCancel = () => {
+		setIsUpdating(false)
+	}
+
+	const {
+		register,
+		handleSubmit,
+		formState: { error },
+	} = useForm({
+		values: userData?.data,
+	})
+
+	if (userIsError) {
+		return (
+			<div className='mt-8 text-red-500'>
+				Ma'lumotlarni yuklashda xatolik yuz berdi!
+			</div>
+		)
+	}
+
 	return (
 		<div className='mt-8 flex flex-col md:flex-row gap-12 text-slate-800'>
 			{/* Chap qism: Foydalanuvchi ma'lumotlari */}
@@ -11,27 +63,27 @@ export default function AccountSettings() {
 					<label className='text-sm font-semibold text-slate-700'>
 						Full name
 					</label>
-					<div className='h-12 w-full rounded-lg bg-slate-50 border border-transparent px-4 py-3 text-sm text-slate-500'>
-						Javohir Kubayev
-					</div>
+					<Input
+						className={`h-12 w-full rounded-lg bg-slate-50 border border-transparent px-4 py-3 text-sm text-slate-500 ${error && ''}`}
+						type='text'
+						placeholder='Javohir Kubayev'
+						{...register('full_name')}
+						disabled={!isUpdating}
+					/>
 				</div>
 
 				{/* Email */}
 				<div className='space-y-2'>
-					<label className='text-sm font-semibold text-slate-700'>Email</label>
-					<div className='h-12 w-full rounded-lg bg-slate-50 border border-transparent px-4 py-3 text-sm text-slate-500'>
-						javohir.kubayev@email.com
-					</div>
-				</div>
-
-				{/* Username */}
-				<div className='space-y-2'>
 					<label className='text-sm font-semibold text-slate-700'>
-						Username
-					</label>
-					<div className='h-12 w-full rounded-lg bg-slate-50 border border-transparent px-4 py-3 text-sm text-slate-500'>
-						javohir.kubayev
-					</div>
+						Address
+					</label>``
+					<Input
+						className={`h-12 w-full rounded-lg bg-slate-50 border border-transparent px-4 py-3 text-sm text-slate-500 ${error && ''}`}
+						type='text'
+						placeholder='javohir.kubayev@email.com'
+						{...register('email')}
+						disabled={!isUpdating}
+					/>
 				</div>
 
 				{/* Phone Number */}
@@ -39,16 +91,43 @@ export default function AccountSettings() {
 					<label className='text-sm font-semibold text-slate-700'>
 						Phone Number
 					</label>
-					<div className='h-12 w-full rounded-lg bg-slate-50 border border-transparent px-4 py-3 text-sm text-slate-500'>
-						+998 | 90 169 35 28
-					</div>
+					<Input
+						className={`h-12 w-full rounded-lg bg-slate-50 border border-transparent px-4 py-3 text-sm text-slate-500 ${error && ''}`}
+						type='text'
+						placeholder='998901693528'
+						{...register('phone_number')}
+						disabled={!isUpdating}
+					/>
 				</div>
 
 				{/* Update Button */}
-				<div className='pt-4'>
-					<Button className='bg-[#299D91] hover:bg-[#238b80] text-white font-medium px-8 h-11 rounded-lg'>
-						Update Profile
-					</Button>
+				<div className='pt-4 flex gap-4'>
+					{isUpdating ? (
+						<>
+							<Button
+								onClick={handleSubmit(onUpdating)}
+								variant='ghost'
+								className='border border-[#299D91] hover:bg-[#299D91]/10 text-[#299D91] hover font-medium px-8 h-11 rounded-lg cursor-pointer'
+							>
+								Update
+							</Button>
+							<Button
+								onClick={handleSubmit(onCancel)}
+								className='bg-red-500 hover:bg-red-600/90 text-white font-medium px-8 h-11 rounded-lg cursor-pointer'
+							>
+								Cancel
+							</Button>
+						</>
+					) : (
+						<>
+							<Button
+								onClick={handleSubmit(onUpdating)}
+								className='bg-[#299D91] hover:bg-[#238b80] text-white font-medium px-8 h-11 rounded-lg cursor-pointer'
+							>
+								Update Profile
+							</Button>
+						</>
+					)}
 				</div>
 			</div>
 

@@ -1,4 +1,5 @@
-import DashnoardSettings from '@/pages/dashboard/dashnoard-settings/dashnoard-settings'
+/* eslint-disable react-refresh/only-export-components */
+import DashboardSettings from '@/pages/dashboard/dashnoard-settings/dashnoard-settings'
 import { lazy } from 'react'
 
 const DashboardLayout = lazy(() => import('@/layouts/dashboard-layout'))
@@ -15,23 +16,21 @@ const DashboardRegister = lazy(
 
 export const dashboardRoutes = [
 	{
+		path: '/dashboard/login',
+		element: <DashboardLogin />,
+	},
+	{
+		path: '/dashboard/register',
+		element: <DashboardRegister />,
+	},
+	{
 		path: '/dashboard',
 		element: <DashboardLayout />,
 		children: [
 			{ index: true, element: <DashboardHome /> },
-
 			{
-				path: '/dashboard/login',
-				element: <DashboardLogin />,
-			},
-
-			{
-				path: '/dashboard/register',
-				element: <DashboardRegister />,
-			},
-			{
-				path: '/dashboard/settings',
-				element: <DashnoardSettings />,
+				path: 'settings',
+				element: <DashboardSettings />,
 			},
 		],
 	},

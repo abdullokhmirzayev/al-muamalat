@@ -36,6 +36,7 @@ request.interceptors.response.use(
 				const { accessToken } = response.data
 				localStorage.setItem('userToken', accessToken)
 				return axios(error.config)
+			// eslint-disable-next-line no-unused-vars
 			} catch (refreshError) {
 				window.location.href = '/sign-in'
 			}

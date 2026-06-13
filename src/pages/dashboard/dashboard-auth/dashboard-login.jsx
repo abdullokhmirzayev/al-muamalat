@@ -21,7 +21,7 @@ export default function SignInPage() {
 		},
 	})
 
-	const { mutate, isPending, isError } = useDashboardAuth()
+	const { mutate, isPending } = useDashboardAuth()
 
 	const onSubmit = async data => {
 		mutate(data)
@@ -80,12 +80,12 @@ export default function SignInPage() {
 							>
 								Password
 							</label>
-							<Link
+							{/* <Link
 								to='/forgot-password'
 								className='text-xs font-semibold text-[#1D9488] hover:underline'
 							>
 								Forgot Password?
-							</Link>
+							</Link> */}
 						</div>
 
 						<div className='relative'>

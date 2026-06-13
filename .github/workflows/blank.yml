@@ -1,0 +1,33 @@
+name: CI/CD + Server Deploy Self Hosted
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      - name: Kodni yuklab olish
+        uses: actions/checkout@v4
+
+      - name: Nodejs Install
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: |
+          rm -rf node_modules package-lock.json
+          npm install --legacy-peer-deps
+
+      - name: Build yaratish
+        run: npm run build
+        env:
+          VITE_API_URL: ${{secrets.VITE_API_URL}}
+
+      - name: Deploy qilish
+        run: rsync -avz --delete /
+          --exclude='.git' /
+          --exclude='node_modules' /
