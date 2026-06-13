@@ -15,9 +15,8 @@ const DashboardRegister = lazy(
 )
 
 const DashboardCourses = lazy(
-	() => import('@/pages/dashboard/courses/dashboard-courses'),
+	() => import('@/pages/dashboard/dashboard-courses/dashboard-courses'),
 )
-
 export const dashboardRoutes = [
 	{
 		path: '/dashboard/login',

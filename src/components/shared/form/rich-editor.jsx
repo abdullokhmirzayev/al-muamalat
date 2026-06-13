@@ -5,7 +5,7 @@ import { EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { Redo, Undo } from 'lucide-react'
 import { useState } from 'react'
-import ImageUploaderDialog from './image-uploader-dialog'
+import ImageUploaderDialog from '../modal/image-uploader-dialog'
 
 const RichEditor = ({ content, onChange }) => {
 	const [isDialogOpen, setIsDialogOpen] = useState(false)

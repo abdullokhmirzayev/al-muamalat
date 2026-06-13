@@ -1,10 +1,11 @@
 import Logo from '@/assets/logo.png'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {
-	BookOpen,
+	GraduationCap,
 	LayoutDashboard,
 	LogOut,
 	MoreVertical,
+	PlayCircle,
 	Settings,
 } from 'lucide-react'
 import { NavLink, useNavigate } from 'react-router-dom'
@@ -16,8 +17,12 @@ export default function Sidebar() {
 	// Yon paneldagi menyu ro'yxati
 	const navItems = [
 		{ name: 'Overview', path: '/dashboard', icon: LayoutDashboard },
-		{ name: 'Courses', path: '/dashboard/courses', icon: BookOpen },
-
+		{ name: 'Courses', path: '/dashboard/courses', icon: GraduationCap },
+		{
+			name: 'Lessons',
+			path: '/dashboard/lessons',
+			icon: PlayCircle,
+		},
 		{ name: 'Settings', path: '/dashboard/settings', icon: Settings },
 	]
 
