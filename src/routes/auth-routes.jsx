@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { ConfirmPasswordForm } from '@/pages/site/auth/components/confirm-password'
 import { ForgotPassword } from '@/pages/site/auth/forgot-password-page'
 import { VerifySignInPage } from '@/pages/site/auth/verify-sign-in-page'

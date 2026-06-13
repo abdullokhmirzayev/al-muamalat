@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { FacebookIcon } from './icons/facebook-icon'
 import { InstagramIcon } from './icons/instagram-icon'
 import { TwitterXIcon } from './icons/twitterx-icon'
@@ -49,13 +50,13 @@ export function Footer() {
 
 				{/* Social icons */}
 				<div className='flex items-center gap-5'>
-					{socials.map(({ icon: Icon, href }, i) => (
+					{socials.map(({ icon, href }, i) => (
 						<a
 							key={i}
 							href={href}
 							className='text-white/80 hover:text-white transition-colors'
 						>
-							<Icon />
+							<icon />
 						</a>
 					))}
 				</div>

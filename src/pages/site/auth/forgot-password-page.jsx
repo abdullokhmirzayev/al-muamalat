@@ -7,7 +7,6 @@ import { ForgotEmailForm } from './components/forgot-email'
 export const ForgotPassword = () => {
 	const [step, setStep] = useState(1) // 1: Email, 2: OTP, 3: New Password
 	const [email, setEmail] = useState('')
-	const [otp, setOtp] = useState('')
 
 	const navigate = useNavigate()
 	const auth = useAuth()

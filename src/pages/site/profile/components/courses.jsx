@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button'
-import { useMakePayment } from '@/hooks/use-make-payment'
+// import { useMakePayment } from '@/hooks/use-make-payment'
 import { PaymentButton } from './payment-button'
 
 // API_URL ni loyihangizga qarab moslang (agar .env dan kelayotgan bo'lsa)
@@ -16,15 +16,15 @@ const ProfileCourses = ({ courses, isLoading, isError, userId }) => {
 
 	console.log(courses)
 
-	const { makePayment, isLoading: isPaying } = useMakePayment()
+	// const { makePayment, isLoading: isPaying } = useMakePayment()
 
-	const handlePayment = courseId => {
-		const submitData = {
-			course_id: courseId,
-			user_id: userId,
-		}
-		makePayment(submitData)
-	}
+	// const handlePayment = courseId => {
+	// 	const submitData = {
+	// 		course_id: courseId,
+	// 		user_id: userId,
+	// 	}
+	// 	makePayment(submitData)
+	// }
 
 	return (
 		<div className='md:col-span-2 bg-white p-6 rounded-2xl shadow-sm border border-slate-100'>
@@ -41,7 +41,7 @@ const ProfileCourses = ({ courses, isLoading, isError, userId }) => {
 			<div className='grid grid-cols-1 sm:grid-cols-2 gap-6'>
 				{purchasedCourses.map(item => {
 					const courseDetail = item.courses[0]
-					const isPaid = item.purchase_status === 'success'
+					// const isPaid = item.purchase_status === 'success'
 
 					// Rasm URL manzilini tekshirib olish
 					const imageUrl = courseDetail?.images?.[0]?.src

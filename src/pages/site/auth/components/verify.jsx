@@ -21,6 +21,7 @@ const Verify = ({ onSuccess, type = 'signin', action }) => {
 
 	const navigate = useNavigate()
 
+	// eslint-disable-next-line react-hooks/incompatible-library
 	const otpValue = watch('otp')
 	const [resendTimer, setResendTimer] = useState(0)
 	const inputRefs = useRef([])
@@ -115,6 +116,7 @@ const Verify = ({ onSuccess, type = 'signin', action }) => {
 		if (!auth?.user?.email && !savedEmail) {
 			navigate(type === 'signup' ? '/sign-up' : '/sign-in')
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	return (

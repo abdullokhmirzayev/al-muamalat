@@ -12,6 +12,7 @@ import {
 	Wallet,
 } from 'lucide-react'
 import { NavLink, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 export default function Sidebar() {
 	const navigate = useNavigate()

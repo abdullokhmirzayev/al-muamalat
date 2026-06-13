@@ -7,7 +7,7 @@ import ProfileCourses from './components/courses'
 import ProfileInfo from './components/profile-info'
 
 const ProfilePage = () => {
-	const { data: apiResponse, isLoading } = useQuery({
+	const { data: apiResponse } = useQuery({
 		queryKey: ['userData'],
 		queryFn: () => request.get('/users/me').then(res => res.data),
 	})

@@ -11,7 +11,6 @@ export default function AccountSettings() {
 
 	const {
 		data: userData,
-		isLoading: userIsLoading,
 		isError: userIsError,
 	} = useQuery({
 		queryKey: ['dashboard-user'],

@@ -23,7 +23,7 @@ const AuthProvider = ({ children }) => {
 		setLoading(true)
 		request
 			.post('/v2/auth/signin/init', params)
-			.then(response => {
+			.then(() => {
 				localStorage.setItem('tempEmail', params.email)
 				setUser({ email: params.email })
 				if (callback) callback()
@@ -112,7 +112,7 @@ const AuthProvider = ({ children }) => {
 		setLoading(true)
 		request
 			.post('/v2/auth/password/forgot/init', params)
-			.then(response => {
+			.then(() => {
 				localStorage.setItem('tempEmail', params.email)
 				setUser({ email: params.email })
 				if (callback) callback()
@@ -129,7 +129,7 @@ const AuthProvider = ({ children }) => {
 		setLoading(true)
 		request
 			.post('/v2/auth/password/forgot/confirm', params)
-			.then(response => {
+			.then(() => {
 				toast.success('Parol yangilandi!')
 				if (callback) callback()
 			})

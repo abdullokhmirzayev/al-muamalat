@@ -47,6 +47,8 @@ dashboardRequest.interceptors.response.use(
 				localStorage.removeItem('dashboardToken')
 				localStorage.removeItem('dashboardRefreshToken')
 				window.location.href = '/dashboard/login'
+
+				console.log(refreshError)
 			}
 		}
 		return Promise.reject(error)

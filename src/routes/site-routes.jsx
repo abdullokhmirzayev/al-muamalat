@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { lazy } from 'react'
 const RootLayout = lazy(() => import('@/layouts/root-layout'))
 const Home = lazy(() => import('@/pages/site/home/home-page'))

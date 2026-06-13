@@ -16,7 +16,6 @@ const SignInPage = () => {
 	const {
 		handleSubmit,
 		register,
-		formState: { errors },
 	} = useForm({
 		defaultValues: {
 			email: '',
